@@ -1,6 +1,25 @@
-import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+// import { NoteProvider } from '../context/NoteContext';
+// import '../styles/global.css';
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+// function MyApp({ Component, pageProps }) {
+//   return (
+//     <NoteProvider>
+//       <Component {...pageProps} />
+//     </NoteProvider>
+//   );
+// }
+
+// export default MyApp;
+import { AppProps } from 'next/app'
+import { NoteProvider } from '../context/NoteContext'
+import '../styles/global.css'
+
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+	return (
+		<NoteProvider>
+			<Component {...pageProps} />
+		</NoteProvider>
+	)
 }
+
+export default MyApp
