@@ -1,49 +1,15 @@
-// import React from 'react'
-// import { createContext, useState } from 'react'
-// export const NoteContext = createContext();
-
-// export const NoteProvider = ({children}) => {
-//     const [notes, setNotes] = useState([]);
-
-//     const addNote = (newNote) => {
-//         setNotes([...notes, newNote]);
-//     }
-
-//     const editNote = (id, updatedNote) => {
-//         setNotes(prevNotes => {
-//             return prevNotes.map(note => {
-//               if (note.id === id) {
-//                 return { ...note, ...updatedNote };
-//               }
-//               return note;
-//             });
-//         });
-//     }
-
-//     const deleteNote = (id) => {
-//         const updatedNotes =  notes.filter((note) => note.id !== id);
-//         setNotes(updatedNotes);
-//     }
-
-//     return (
-//         <NoteContext.Provider value={{notes, addNote, editNote, deleteNote}}>
-//             <div>{children}</div>
-//         </NoteContext.Provider>
-//     )
-// }
-
 import { FC, ReactNode, createContext, useState } from 'react'
 
 interface Note {
-	id: string
+	id: number
 	[key: string]: any
 }
 
 interface NoteContextType {
 	notes: Note[]
 	addNote: (newNote: Note) => void
-	editNote: (id: string, updatedNote: Partial<Note>) => void
-	deleteNote: (id: string) => void
+	editNote: (id: number, updatedNote: Partial<Note>) => void
+	deleteNote: (id: number) => void
 }
 
 export const NoteContext = createContext<NoteContextType | undefined>(undefined)
@@ -59,10 +25,10 @@ export const NoteProvider: FC<NoteProviderProps> = ({ children }) => {
 		setNotes([...notes, newNote])
 	}
 
-	const editNote = (id: string, updatedNote: Partial<Note>): void => {
+	const editNote = (id: number, updatedNote: Partial<Note>): void => {
 		setNotes(prevNotes => {
 			return prevNotes.map(note => {
-				if (note.id === id) {
+				if (Number(note.id) === id) {
 					return { ...note, ...updatedNote }
 				}
 				return note
@@ -70,7 +36,7 @@ export const NoteProvider: FC<NoteProviderProps> = ({ children }) => {
 		})
 	}
 
-	const deleteNote = (id: string): void => {
+	const deleteNote = (id: number): void => {
 		const updatedNotes = notes.filter(note => note.id !== id)
 		setNotes(updatedNotes)
 	}

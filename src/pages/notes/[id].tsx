@@ -13,7 +13,7 @@ const NoteDetails = () => {
 	}
 	const { notes } = context
 
-	const note = notes.find(note => note.id === Number(id))
+	const note = notes.find(note => Number(note.id) === Number(id))
 
 	if (!note) {
 		return <div>Note not found</div>
